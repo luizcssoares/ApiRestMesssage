@@ -1,13 +1,14 @@
 pipeline {
-    agent any
+    agent {
+              docker { image 'maven' }
+          }     
     stages {
-        stage('Build') {
-            steps {
-                // Get some code from a GitHub repository
-                git url: 'https://github.com/luizcssoares/apirestmessage.git', branch: 'master'               
-                // Run shell script
-                echo "processo cocluido"
-            }
-        }
+       stage('Maven Build'){               
+          steps{
+		      sh 'https://github.com/luizcssoares/apirestmessage.git' 
+		      sh 'mvn --version' 
+              sh 'mvn package -Dmaven.test.skip=true'              
+          }       
+       }             
     }
-}
+  }
