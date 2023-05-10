@@ -1,7 +1,5 @@
-node {
-    stages {
-       stage('Maven Build'){               
-          echo 'e tal...'
-       }             
-    }
+node {    
+     stage('Maven Build'){               
+        echo 'e tal...'
+     }                 
   }
