@@ -1,7 +1,5 @@
 node {   
-      stage('Build MVN') {	
-	    steps{
-		 sh 'mvn --version'            
-	    }     
+      stage('Build MVN') {		  
+	 sh 'mvn --version'            	    
       }
   }
