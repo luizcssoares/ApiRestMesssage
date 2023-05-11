@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ApiRestMessage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ApiRestMessage
+  template:
+    metadata:
+      labels:
+        app: ApiRestMessage
+    spec:
+      containers:
+      - name: ApiRestMessage
+        image: ApiRestMessage
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+---
+kind: Service
+metadata:
+  name: ApiRestMessage
+spec:
+  selector:
+    app: ApiRestMessage
+  type: NodePort
+  ports:
+    - protocol : "TCP"   
+      port: 8080
+      targetPort: 8080
