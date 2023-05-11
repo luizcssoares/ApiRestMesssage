@@ -5,4 +5,7 @@ node {
       stage('Build MVN') {		  
 	 bat 'mvn clean package'     
       }	
+      stage('Docker image'){
+	 bat 'docker build -t luizcssoares/apirestmessage .'
+      }
   }
