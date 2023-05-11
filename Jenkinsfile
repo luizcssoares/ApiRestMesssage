@@ -1,5 +1,8 @@
 node {   
-      stage('Build MVN') {		  
-	 bat 'mvn --version'     
+      stage('MVN version') {		  
+	 bat 'mvn --version'
       }
+      stage('Build MVN') {		  
+	 bat 'mvn clean package'     
+      }	
   }
