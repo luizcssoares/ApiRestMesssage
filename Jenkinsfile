@@ -9,7 +9,7 @@ node {
 	 bat 'docker build -t luizcssoares/apirestmessage .'
       }
       stage('Push Docker image'){
-	 bat 'docker push luizcssoares/apirestmessage .'
+	 bat 'docker push luizcssoares/apirestmessage:tagname'
       }	
       stage('Kubernetes'){
 	 bat 'kubectl apply -f deployment.yml'
