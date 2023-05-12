@@ -22,7 +22,7 @@ pipeline {
 	      stage('Deploy our image') {
 		      steps{
 			script {
-			    docker.withRegistry( '', 'luizcssoares/apirestmessage' ) {
+			    docker.withRegistry( '', DOCKERHUB_CREDENTIALS ) {
 			       dockerImage.push()
 			    }
 			}
