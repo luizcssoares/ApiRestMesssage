@@ -16,14 +16,18 @@ pipeline {
 	      }	
 	      stage('Docker Build'){
 		      steps {
-		           bat 'docker build -t luizcssoares/apirestmessage:latest .'
+		           bat 'docker build -t luizcssoares/apirestmessage .'
 		      }
-	      }	  	      
-	      stage('Push DockerHub'){
-		      steps {
-		           bat 'docker push luizcssoares/apirestmessage:latest'
+	      }	  	      	      
+	      stage('Deploy our image') {
+		      steps{
+			script {
+			    docker.withRegistry( '', 'luizcssoares/apirestmessage' ) {
+			       dockerImage.push()
+			    }
+			}
 		      }
-	      }	
+	      }	      
 	      stage('Kubernetes'){
 		      steps {
 		           bat 'kubectl apply -f deployment.yml'
