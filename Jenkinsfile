@@ -16,12 +16,12 @@ pipeline {
 	      }	
 	      stage('Docker Build'){
 		      steps {
-		           bat 'docker build -t luizcssoares/apirestmessage:latest .'
+		           bat 'docker build -t luizcssoares/apirestmessage .'
 		      }
 	      }	    
 	      stage('Push DockerHub'){
 		      steps {
-		           bat 'docker push luizcssoares/apirestmessage:latest'
+		           bat 'docker push luizcssoares/apirestmessage'
 		      }
 	      }	
 	      stage('Kubernetes'){
