@@ -1,5 +1,5 @@
 pipeline {
-      enviroments {
+      environment {
          DOCKERHUB_CREDENTIALS = credentials('luizcssoares-dockerhub')
       }	 
       stages {	
