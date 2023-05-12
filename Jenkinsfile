@@ -16,12 +16,17 @@ pipeline {
 	      }	
 	      stage('Docker Build'){
 		      steps {
-		           bat 'docker build -t luizcssoares/apirestmessage .'
+		           bat 'docker build -t luizcssoares/apirestmessage:latest .'
 		      }
-	      }	    
+	      }	  
+	      stage('Login') {
+		      steps {
+			   bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+		      }
+	      }
 	      stage('Push DockerHub'){
 		      steps {
-		           bat 'docker push luizcssoares/apirestmessage'
+		           bat 'docker push luizcssoares/apirestmessage:latest'
 		      }
 	      }	
 	      stage('Kubernetes'){
