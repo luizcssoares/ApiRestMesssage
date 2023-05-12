@@ -18,12 +18,7 @@ pipeline {
 		      steps {
 		           bat 'docker build -t luizcssoares/apirestmessage:latest .'
 		      }
-	      }
-	      stage('DockerHub Login'){
-		      steps {
-		           bat 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-		      }
-	      }	
+	      }	    
 	      stage('Push DockerHub'){
 		      steps {
 		           bat 'docker push luizcssoares/apirestmessage:latest'
