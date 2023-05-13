@@ -1,7 +1,9 @@
 pipeline {
       agent any
       environment {
-         DOCKERHUB_CREDENTIALS = credentials('luizcssoares-dockerhub')
+	 registry = 'luizcssoares/apirestmessage'     
+         dockerhub_credentials = 'luizcssoares-dockerhub'
+	 docker_image = ''     
       }	 
       stages {	
 	      stage('GIT push') {
@@ -16,16 +18,18 @@ pipeline {
 	      }	
 	      stage('Docker Build'){
 		      steps {
-		           bat 'docker build -t luizcssoares/apirestmessage .'
+			      script {     
+			            docker_image = docker.build registry + ":$BUILD_NUMBER"		           
+			      }
 		      }
 	      }	  	      	      
 	      stage('Deploy our image') {
 		      steps{
-			script {
-			    docker.withRegistry( '', DOCKERHUB_CREDENTIALS ) {
-			       dockerImage.push()
+			    script {
+			          docker.withRegistry( '', dockerhub_credentials ) {
+			              docker_image.push()
+			          }
 			    }
-			}
 		      }
 	      }	      
 	      stage('Kubernetes'){
