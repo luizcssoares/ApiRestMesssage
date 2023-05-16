@@ -17,7 +17,7 @@ pipeline {
 		      }
 	      }	
 	      stage('Docker Build'){
-		      steps {
+		      steps {			      			      			      
 			      script {     
 			            docker_image = docker.build registry + ":$BUILD_NUMBER"		           
 			      }
@@ -26,8 +26,8 @@ pipeline {
 	      stage('Deploy our image') {
 		      steps{
 			    script {
-				  echo "pushing"  
-			          docker.withRegistry( '', dockerhub_credentials ) {
+				  echo "pushing"  				 				  				    				    				    
+			          docker.withRegistry( registry, dockerhub_credentials ) {
 			              docker_image.push()
 			          }
 				  echo "pushed"   
