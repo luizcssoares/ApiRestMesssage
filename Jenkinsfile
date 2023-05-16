@@ -27,7 +27,7 @@ pipeline {
 		      steps{
 			    script {
 				  echo "pushing"  				 				  				    				    				    
-			          docker.withRegistry( registry, dockerhub_credentials ) {
+			          docker.withRegistry( "", dockerhub_credentials ) {
 			              docker_image.push()
 			          }
 				  echo "pushed"   
