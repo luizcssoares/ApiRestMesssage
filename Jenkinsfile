@@ -26,9 +26,11 @@ pipeline {
 	      stage('Deploy our image') {
 		      steps{
 			    script {
+				  echo "pushing"  
 			          docker.withRegistry( '', dockerhub_credentials ) {
 			              docker_image.push()
 			          }
+				  echo "pushed"   
 			    }
 		      }
 	      }	      
