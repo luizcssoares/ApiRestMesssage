@@ -23,21 +23,8 @@ pipeline {
 			      }
 		      }
 	      }	  	      	      
-	      stage('Deploy our image') {
-		      steps{
-			    script {
-				  echo "pushing " + docker_image  				 				  				    				    				    
-			          docker.withRegistry( "", dockerhub_credentials ) {
-			              docker_image.push()
-			          }
-				  echo "pushed"   
-			    }
-		      }
-	      }	      
-	      stage('Kubernetes'){
-		      steps {
-		           bat 'kubectl apply -f deployment.yml'
-		      }
-	      }	        
+	      stage('Finalizado'){
+		     echo "Processo concluido"  
+	      } 
       }  
 }
