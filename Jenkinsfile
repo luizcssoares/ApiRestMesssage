@@ -27,7 +27,7 @@ pipeline {
 		      steps{
 			    script {				  				  				    				    				  
 				  echo "pushing " + docker_image  	                      				 
-			          docker.withRegistry( "https://hub.docker.com/repository/docker/luizcssoares/apirestmessage", dockerhub_credentials ) {
+			          docker.withRegistry( '', dockerhub_credentials ) {
 			              docker_image.push()
 			          }
 				  echo "pushed"   
