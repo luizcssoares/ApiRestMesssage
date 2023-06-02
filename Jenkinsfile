@@ -25,12 +25,12 @@ pipeline {
 	      }	  	      	      
 	      stage('Deploy our image') {
 		      steps{
-			    script {
-				  echo "pushing " + docker_image  				 				  				    				    				    
-			          docker.withRegistry( "", dockerhub_credentials ) {
+			    script {				  				 			    
+				  echo "pushing " + docker_image  				 	
+				  docker.withRegistry([ credentialsId: dockerhub_credentials, url: "" ]) {  			          
 			              docker_image.push()
 			          }
-				  echo "pushed"   
+				  echo "image pushed"   
 			    }
 		      }
 	      }	      
