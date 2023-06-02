@@ -25,13 +25,13 @@ pipeline {
 	      }	  	      	      
 	      stage('Deploy our image') {
 		      steps{
-			    script {				  				 			    
-				  echo "pushing " + docker_image  				 	
-				  docker.withRegistry([ credentialsId: dockerhub_credentials, url: "" ]) {  			          
+			    script {				  				  				    				    				  
+				  echo "pushing " + docker_image  	                      				 
+			          docker.withRegistry( "https://hub.docker.com/repository/docker/luizcssoares/apirestmessage", dockerhub_credentials ) {
 			              docker_image.push()
 			          }
-				  echo "image pushed"   
-			    }
+				  echo "pushed"   
+			    }			
 		      }
 	      }	      
 	      stage('Kubernetes'){
