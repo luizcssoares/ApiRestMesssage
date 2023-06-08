@@ -19,10 +19,8 @@ pipeline {
 		      }
 	      }	
 	      stage('Docker Build'){
-		      steps {			      			      			      
-			      script {     
-			            docker_image = docker.build registry + ":latest"		
-			      }
+		      steps {		
+			   sh 'Docker build -t var/lib/jenkins/workspace/ApiRestMessage/target/ApiRestMessage-0.0.1-SNAPSHOT.jar'   			   
 		      }
 	      }	  	      	      
 	      stage('Deploy our image') {
