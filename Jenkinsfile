@@ -5,13 +5,8 @@ pipeline {
          dockerhub_credentials = 'luizcssoares-dockerhub'
 	 docker_image = ''     
       }	 
-      stages {	
-	      stage('CRIANDO Pasta'){
-		      steps {
-			      sh 'mkdir -p ApiRestMensagem'
-		      }
-	      }
-	      stage('GIT push') {
+      stages {		    
+	      stage('GIT pull') {
 		      steps{  
 			   dir('ApiRestMensagem') {   
 		               git url: "https://github.com/luizcssoares/ApiRestMessage.git"
