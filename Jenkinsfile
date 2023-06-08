@@ -17,8 +17,10 @@ pipeline {
 		      }
 	      }	
 	      stage('Docker Build'){
-		      script {		
-			   sh 'docker build -t luizcssoares/ApiRestMessage'   			   
+		      steps{
+			   script {		
+			          sh 'docker build -t luizcssoares/ApiRestMessage'   			   
+			    }
 		      }
 	      }	  	      	      
 	      stage('Deploy our image') {
