@@ -8,10 +8,8 @@ pipeline {
       stages {		    
 	      stage('GIT pull') {
 		      steps{  
-			   dir('ApiRestMensagem') {   
-		               git url: "https://github.com/luizcssoares/ApiRestMessage.git"
-			   }				   
-		      }
+			    git url: "https://github.com/luizcssoares/ApiRestMessage.git"
+		      }				   		      
 	      }
 	      stage('Build Maven') {		
 		      steps {
@@ -19,8 +17,8 @@ pipeline {
 		      }
 	      }	
 	      stage('Docker Build'){
-		      steps {		
-			   sh 'docker build -t var/lib/jenkins/workspace/ApiRestMessage/target/ApiRestMessage-0.0.1-SNAPSHOT.jar'   			   
+		      script {		
+			   sh 'docker build -t luizcssoares/ApiRestMessage'   			   
 		      }
 	      }	  	      	      
 	      stage('Deploy our image') {
