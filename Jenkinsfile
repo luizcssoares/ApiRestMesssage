@@ -1,7 +1,7 @@
 pipeline {
       agent any
       environment {
-	 registry = 'luizcssoares/apirestmessage'     
+	 registry = 'var/lib/jenkins/workspace/ApiRestMessage/target/ApiRestMessage-0.0.1-SNAPSHOT.jar'     
          dockerhub_credentials = 'luizcssoares-dockerhub'
 	 docker_image = ''     
       }	 
@@ -21,7 +21,7 @@ pipeline {
 	      stage('Docker Build'){
 		      steps {			      			      			      
 			      script {     
-			            docker_image = docker.build registry + ":$BUILD_NUMBER"		
+			            docker_image = docker.build registry + ":latest"		
 			      }
 		      }
 	      }	  	      	      
