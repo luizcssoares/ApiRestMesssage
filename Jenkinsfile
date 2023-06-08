@@ -6,9 +6,16 @@ pipeline {
 	 docker_image = ''     
       }	 
       stages {	
+	      stage('CRIANDO Pasta'){
+		      steps {
+			      sh 'mkdir -p ApiRestMensagem'
+		      }
+	      }
 	      stage('GIT push') {
 		      steps{  
-		           git url: "https://github.com/luizcssoares/ApiRestMessage.git"
+			   dir('ApiRestMensagem') {   
+		               git url: "https://github.com/luizcssoares/ApiRestMessage.git"
+			   }				   
 		      }
 	      }
 	      stage('Build Maven') {		
