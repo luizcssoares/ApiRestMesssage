@@ -22,18 +22,18 @@ pipeline {
 				   docker_image = docker.build  registry
 			    }
 		      }
-	      }	  	      	      
-	      stage('Deploy our image') {
-		      steps{  
-			      script {
-				 echo "pushing " + docker_image
-				      docker.withRegistry( '', dockerhub_credentials ) {
-					 docker_image.push()
-				      }
-				 echo "pushed"
-			      }
-		      }
-	      }	      
+	      }	  
+              stage ('Deploy NEXUS'){
+		    steps {
+			    script {
+				echo "pushing NEXUS " + docker_image    
+				     docker.withRegistry('http://localhost:10001/repository/docker-api-message', 'admin-admin123') {
+                                     docker_image.push()
+                                    }
+				echo "pushed"    
+			    }
+		    }
+	      }	      	     
 	      stage('Kubernetes'){
 		      steps {
 		           sh 'kubectl apply -f deployment.yml'
