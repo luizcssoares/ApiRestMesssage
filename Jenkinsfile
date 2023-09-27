@@ -27,7 +27,7 @@ pipeline {
 		    steps {
 			    script {
 				echo "pushing NEXUS " + docker_image    
-				     docker.withRegistry('http://localhost:10001/repository/docker-api-message', 'admin-admin123') {
+				     docker.withRegistry('http://localhost:8081/docker-api-message', 'admin') {
                                      docker_image.push()
                                     }
 				echo "pushed"    
