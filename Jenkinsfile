@@ -26,8 +26,8 @@ pipeline {
               stage ('Deploy NEXUS'){
 		    steps {
 			    script {
-				echo "pushing NEXUS " + docker_image    
-				     docker.withRegistry('http://localhost:8081/repository/docker-api-message/'+docker_image, 'nexus-user-credentials') {
+				echo "pushing NEXUS " + docker_image    				                          
+				     docker.withRegistry('http://localhost:8081/nexus/content/repository/docker-api-message/', 'nexus-user-credentials') {
                                      docker_image.push()
                                     }
 				echo "pushed"    
