@@ -1,4 +1,4 @@
-s-usepipeline {
+pipeline {
       agent any
       environment {
 	 registry = 'luizcssoares/apirestmessage'
