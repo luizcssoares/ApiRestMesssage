@@ -27,7 +27,7 @@ pipeline {
 		    steps {
 			    script {
 				echo "pushing NEXUS " + docker_image    				                          
-				     docker.withRegistry('http://localhost:8023/service/rest/v1/components?repository=docker-api-message', 'nexus-user-credentials') {
+				     docker.withRegistry('http://localhost:8023/repository/docker-api-message', 'nexus-user-credentials') {
                                      docker_image.push()
                                     }
 				echo "pushed"    
