@@ -2,8 +2,7 @@ pipeline {
       agent any
       environment {
 	 registry = 'luizcssoares/apirestmessage'
-         dockerhub_credentials = 'luizcssoares-dockerhub'
-	 nexus_credentials = 'nexus-user-credentials'     
+         dockerhub_credentials = 'luizcssoares-dockerhub'     
 	 docker_image = ''     
       }	 
       stages {		    
@@ -28,7 +27,7 @@ pipeline {
 		    steps {
 			    script {
 				echo "pushing NEXUS "    				                          
-				docker.withRegistry('http://localhost:8023/repository/docker-api-message', nexus_credentials) {
+				docker.withRegistry('http://localhost:8023/repository/docker-api-message', 'nexus-user-credentials') {
                                    docker_image.push('latest')
                                 }
 				echo "pushed"    
