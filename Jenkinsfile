@@ -23,31 +23,17 @@ pipeline {
 			    }
 		      }
 	      }	  
-	      stage('Deploy our image') {
+	      stage('Deploy Git Hub') {
 		      steps{
 			    script {
 				    docker.withRegistry( '', dockerhub_credentials ) {
 			                docker_image.push("$BUILD_NUMBER")
 			                docker_image.push('latest')			
-			            }
-				    // docker.withRegistry( '', dockerhub_credentials ) {
-			            //    docker_image.push()
-			            // }						
+			            }				  				
 			    }
 		      }
-	      }	  
-              // stage ('Deploy NEXUS'){
-		//    steps {
-		//	    script {
-		//		echo "pushing NEXUS "    				                          
-				// docker.withRegistry('http://127.0.0.1:8023/repository/docker-api-message', 'nexus-user-credentials') {
-                                //   docker_image.push('latest')
-                                // }
-		//		echo "pushed"    
-		//	    }
-		//   }
-	      // }	      	     
-	      stage('Kubernetes'){
+	      }	               	      	     
+	      stage('Implantacao Kubernetes'){
 		      steps {
 		           sh 'kubectl apply -f deployment.yml'
 		      }
