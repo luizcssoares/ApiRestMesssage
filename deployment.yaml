@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apimessage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apimessage
+  template:
+    metadata:
+      labels:
+        app: apimessage
+    spec:
+      containers:
+      - name: apimessage
+        image: luizcssoares/apimessage:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
