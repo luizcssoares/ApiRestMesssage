@@ -47,9 +47,10 @@ pipeline {
                 }
             }
           }
-		  stage('Result')
+		  stage('Result') {
 		    steps {
 				echo 'Deployed Successfull'
 			}
+		  }
       }  
 }
