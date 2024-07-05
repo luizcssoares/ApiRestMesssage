@@ -24,7 +24,7 @@ pipeline {
 			    }
 		      }
 	      }	  
-	      stage('Deploy Git Hub') {
+	      stage('Deploy Docker Hub') {
 		      steps{
 			    script {
 				    docker.withRegistry( '', dockerhub_credentials ) {
@@ -47,6 +47,9 @@ pipeline {
                 }
             }
           }
-
+		  stage('Result')
+		    steps {
+				echo 'Deployed Successfull'
+			}
       }  
 }
