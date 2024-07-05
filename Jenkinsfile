@@ -40,6 +40,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
                     bat """
                         kubectl apply -f deployment.yaml \
+						kubectl apply -f service.yaml \
                         --token="$KUBE_SA_TOKEN" \
                         --server=https://127.0.0.1:54840 \
                         --insecure-skip-tls-verify
