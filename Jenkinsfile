@@ -23,7 +23,31 @@ pipeline {
 				   docker_image = docker.build  registry
 			    }
 		      }
-	      }	  	      
+	      }	  
+	      stage('Deploy Docker Hub') {
+		      steps{
+			    script {
+				    docker.withRegistry( '', dockerhub_credentials ) {
+			                docker_image.push("$BUILD_NUMBER")
+			                docker_image.push('latest')			
+			            }				  				
+			    }
+		      }
+	      }	      
+		  stage('Deploy to Minikube') {
+            steps {
+                // Apply Kubernetes deployment using the Kubernetes service account
+                withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
+                    bat """
+                        kubectl apply -f deployment.yaml \
+						kubectl apply -f service.yaml \
+                        --token="$KUBE_SA_TOKEN" \
+                        --server=https://127.0.0.1:54840 \
+                        --insecure-skip-tls-verify
+                    """
+                }
+            }
+          }
 		  stage('Result') {
 		    steps {
 				echo 'Deployed Successfull'
