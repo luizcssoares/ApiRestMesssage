@@ -33,26 +33,25 @@ pipeline {
 			            }				  				
 			    }
 		      }
-	      }	     
-
-		  stage('Deploying React.js container to Kubernetes') {
+	       }	     
+		   stage('Deploy to Kubernetes') {
 			steps {
-				script {
-				    kubernetesDeploy(configs: "deployment.yaml")
-				}
+				kubernetesDeploy(
+					configs: 'deployment.yaml',
+					kubeconfigId: 'secrets'
+				)
 			}
-		  }
-
+          }
 		  //stage('Deploy to Minikube') {
           //  steps {
                 // Apply Kubernetes deployment using the Kubernetes service account
-         //       withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
-        //            bat 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:65173 --insecure-skip-tls-verify=true --validate=false'
+          //      withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
+          //          bat 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:65173 --insecure-skip-tls-verify=true --validate=false'
 					//bat 'kubectl port-forward service/apimessage 54083:31146' 
 					//bat 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:54840 --insecure-skip-tls-verify=true --validate=false'
-        //        }
-        //    }
-        //  }
+          //       }
+          //   }
+          // }
 		  stage('Result') {
 		    steps {
 				echo 'Deployed Successfull'
