@@ -14,7 +14,7 @@ pipeline {
 	      }
 	      stage('Build Maven') {		
 		      steps {
-		           sh 'mvn -B -DskipTests clean package'     
+		           bat 'mvn -B -DskipTests clean package'     
 		      }
 	      }	
 	      stage('Docker Build'){
