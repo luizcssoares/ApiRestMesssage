@@ -36,10 +36,7 @@ pipeline {
 	       }	     
 		   stage('Deploy to Kubernetes') {
 			steps {
-				kubernetesDeploy(
-					configs: 'deployment.yaml',
-					kubeconfigId: 'secrets'
-				)
+				sshCommand remote: remote, command: "kubectl apply -f deployment.yml"
 			}
           }
 		  //stage('Deploy to Minikube') {
