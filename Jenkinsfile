@@ -39,7 +39,7 @@ pipeline {
             steps {
                 kubernetesDeploy(
                                   configs : "deployment.yaml", kubeconfigId: "kubeconfig"
-                                 )
+                                 )  
 
                 // Apply Kubernetes deployment using the Kubernetes service account
                 //withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
