@@ -38,7 +38,7 @@ pipeline {
 			  steps {    
 				 script {     					
 					withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
-                       bat 'kubectl apply -f deployment.yaml'
+                       bat 'kubectl apply -f C:\\Desenvolvimento\\vscode-workspace\\ApiRestMessage\\deployment.yaml'
                     }
 				 }
 
