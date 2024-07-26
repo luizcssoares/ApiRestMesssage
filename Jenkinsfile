@@ -37,7 +37,7 @@ pipeline {
 		  stage('Deploy to Minikube') {
 			  steps {    
 				 script {     					
-					withKubeConfig([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
+					withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
                        bat 'kubectl apply -f deployment.yaml'
                     }
 				 }
