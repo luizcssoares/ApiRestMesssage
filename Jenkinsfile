@@ -35,10 +35,12 @@ pipeline {
 		      }
 	       }	     		  		
 		  stage('Deploy to Minikube') {
-			  steps {         
-					withKubeConfig() {
-					   sh 'kubectl get pods -A'
-					}
+			  steps {    
+				 script {     					
+					withKubeConfig([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
+                       bat 'kubectl apply -f deployment.yaml'
+                    }
+				 }
 
                 // Apply Kubernetes deployment using the Kubernetes service account
                 //withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
