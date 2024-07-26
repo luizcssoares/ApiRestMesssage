@@ -43,7 +43,7 @@ pipeline {
 					//bat 'kubectl apply -f deployment.yaml --validate=false'
 					//bat 'kubectl port-forward service/apimessage 54083:31146' 
 					//bat 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:57141 --insecure-skip-tls-verify=true --validate=false'
-					bat 'kubectl apply -f deployment.yaml'
+					bat 'kubectl apply -f deployment.yaml --validate=false'
                 }
              }
           }
