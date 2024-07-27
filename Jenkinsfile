@@ -35,12 +35,13 @@ pipeline {
 		      }
 	       }	     		  		
 		  stage('Deploy to Minikube') {
-			  steps {    
-				 script {     					
-					withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
-                       bat 'kubectl apply --validate=false -f C:\\Desenvolvimento\\vscode-workspace\\ApiRestMessage\\deployment.yaml'
-                    }
-				 }
+			steps {    
+			  script {
+				KubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+					//withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
+                    //   bat 'kubectl apply --validate=false -f C:\\Desenvolvimento\\vscode-workspace\\ApiRestMessage\\deployment.yaml'
+                    //}
+			  }
 
                 // Apply Kubernetes deployment using the Kubernetes service account
                 //withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {
@@ -50,7 +51,7 @@ pipeline {
 					//bat 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:57141 --insecure-skip-tls-verify=true --validate=false'
 				//	bat 'kubectl apply -f deployment.yaml --validate=false'
                 //}
-              }
+            }
           }
 		  stage('Result') {
 		    steps {
