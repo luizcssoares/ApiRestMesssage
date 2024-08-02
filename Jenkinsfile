@@ -34,8 +34,7 @@ pipeline {
 		}
 		}
 	}	     		  		
-	stage('Deploy to Minikube') {
-	  steps {    
+	stage('Deploy to Minikube') {	   
 		script {						
 			withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {		
 			   bat """				                         
