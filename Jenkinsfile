@@ -34,17 +34,19 @@ pipeline {
 		}
 		}
 	}	     		  		
-	stage('Deploy to Minikube') {	   
-		script {						
-			withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {		
-			   bat """				                         
-				 kubectl apply -f "C:\\Desenvolvimento\\vscode-workspace\\ApiRestMessage\\kubernetes-deployment.yaml" \
-				 --token="$KUBE_SA_TOKEN" \
-				 --server=http://link:port \
-				 --insecure-skip-tls-verify
-			   """			  
-		    }
-	    }
+	stage('Deploy to Minikube') {	
+	    steps {	   
+			script {						
+				withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {		
+				bat """				                         
+					kubectl apply -f "C:\\Desenvolvimento\\vscode-workspace\\ApiRestMessage\\kubernetes-deployment.yaml" \
+					--token="$KUBE_SA_TOKEN" \
+					--server=http://link:port \
+					--insecure-skip-tls-verify
+				"""			  
+				}
+			}
+		}
 	}
 	stage('Result') {
 		steps {
