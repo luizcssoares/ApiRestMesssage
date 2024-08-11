@@ -38,7 +38,7 @@ pipeline {
 	    steps {	   
 			script {						
 				withCredentials([string(credentialsId: 'secrets', variable: KUBE_SA_TOKEN)]) {		
-				  bat 'kubectl apply -f deployment.yaml --token='$KUBE_SA_TOKEN' --server=https://127.0.0.1:64825  --insecure-skip-tls-verify'
+				  sh 'kubectl apply -f deployment.yaml --token='$KUBE_SA_TOKEN' --server=https://127.0.0.1:32771  --insecure-skip-tls-verify'
 				}
 			}
 		}
