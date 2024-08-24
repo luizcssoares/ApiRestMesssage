@@ -37,13 +37,7 @@ pipeline {
 		  		
 		   stage('Deploy to Minikube') {
             steps {
-                // Apply Kubernetes deployment using the Kubernetes service account
-                withCredentials([string(credentialsId: 'jenkins-secrets', variable: KUBE_SA_TOKEN)]) {
-                    sh 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:32771 --insecure-skip-tls-verify=true --validate=false'
-					//sh 'kubectl apply -f deployment.yaml --validate=false'
-					//bat 'kubectl port-forward service/apimessage 54083:31146' 
-					//bat 'kubectl apply -f deployment.yaml --token=$KUBE_SA_TOKEN --server=https://127.0.0.1:54840 --insecure-skip-tls-verify=true --validate=false'
-                 }
+               kubernetesDeploy(configs: "deployment.yaml","service.yaml")  
              }
           }
 		  stage('Result') {
