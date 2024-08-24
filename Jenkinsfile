@@ -7,38 +7,39 @@ pipeline {
 		docker_image = ''
 	}
 	stages { 
-	stage('GIT pull') {
-		steps{
-		   git url: "https://github.com/luizcssoares/ApiRestMessage.git"
-		}
-	}
-	stage('Build Maven') {
-		steps {
-		   bat 'mvn -B -DskipTests clean package'
-		}
-	}
-	stage('Docker Build'){
-		steps{
-		   script {
-		     docker_image = docker.build  registry
-		   }
-		}
-	}
-	stage('Deploy Docker Hub') {
-		steps{
-		   script {
-			   docker.withRegistry( '', dockerhub_credentials ) {
-			      //docker_image.push('$BUILD_NUMBER')
-			      docker_image.push('latest')
-			   }				  				
-		   }
-		}
-	}
-	stage('Deploy to Minikube') {	
-	    steps {
-			script {
-			  kubernetesDeploy(configs: "deployment.yaml","service.yaml")
+		stage('GIT pull') {
+			steps{
+			git url: "https://github.com/luizcssoares/ApiRestMessage.git"
 			}
 		}
-    }
+		stage('Build Maven') {
+			steps {
+			bat 'mvn -B -DskipTests clean package'
+			}
+		}
+		stage('Docker Build'){
+			steps{
+			script {
+				docker_image = docker.build  registry
+			}
+			}
+		}
+		stage('Deploy Docker Hub') {
+			steps{
+			script {
+				docker.withRegistry( '', dockerhub_credentials ) {
+					//docker_image.push('$BUILD_NUMBER')
+					docker_image.push('latest')
+				}				  				
+			}
+			}
+		}
+		stage('Deploy to Minikube') {	
+			steps {
+				script {
+				kubernetesDeploy(configs: "deployment.yaml","service.yaml")
+				}
+			}
+		}
+	}
 }
