@@ -20,7 +20,7 @@ pipeline {
 		stage('Docker Build'){
 			steps{
 			  script {
-			     docker_image = docker.build  registry
+			     docker_image = docker.build  registry + ":$BUILD_NUMBER"
 			  }
 			}
 		}
@@ -28,8 +28,7 @@ pipeline {
 			steps{
 			   script {
 				  docker.withRegistry( '', dockerhub_credentials ) {
-					 docker_image.push('$BUILD_NUMBER')
-					 //docker_image.push('latest')
+					 docker_image.push()					
 				  }				  				
 			   }
 			}
