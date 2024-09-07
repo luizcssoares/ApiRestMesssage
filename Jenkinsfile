@@ -26,9 +26,7 @@ pipeline {
 		}
 		stage('Deploy Docker Hub') {
 			steps{
-			   script {
-				  //sh 'e tal'
-				  //sh 'echo $dockerhub_credentials_psw | docker login -u $dockerhub_credentials_usr --password-stdin'
+			   script {				 
 				  docker.withRegistry( '', dockerhub_credentials ) {
 				     docker_image.push()					
 				  }				  				
