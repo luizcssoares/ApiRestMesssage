@@ -34,12 +34,19 @@ pipeline {
 			   }
 			}
 		}
-		stage('Deploy to Minikube') {	
-			steps {
-				script {
-				   kubernetesDeploy(configs: "deployment.yaml","service.yaml")
-				}
-			}
-		}
+		//stage('Deploy to Minikube') {	
+		//	steps {
+		//		script {
+		//		   kubernetesDeploy(configs: "deployment.yaml","service.yaml")
+		//		}
+		//	}
+		//}
+        stage('Deploy App on k8s') {
+            steps {
+               withCredentials([ string(credentialsId: 'my_kubernetes', variable: 'KUBE_SA_TOKEN') ]) {
+                   sh 'kubectl --token $KUBE_SA_TOKEN --server https://192.168.103.2:8443  --insecure-skip-tls-verify=true apply -f new_deployment.yaml'
+               }
+            }
+        }
 	}
 }
