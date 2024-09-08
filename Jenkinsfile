@@ -43,9 +43,9 @@ pipeline {
 		//}
         stage('Deploy App on k8s') {
             steps {
-               withCredentials([ string(dockerhub_credentials = 'dockerhub_luizcssoares', variable: 'KUBE_SA_TOKEN') ]) {
-                   sh 'kubectl --token $KUBE_SA_TOKEN --server https://127.0.0.1:32771  --insecure-skip-tls-verify=true apply -f new_deployment.yaml'
-               }
+               withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:32771']) {
+                  sh 'kubectl apply -f new_deployment.yaml'
+               }               
             }
         }
 	}
