@@ -43,9 +43,11 @@ pipeline {
 		//}
         stage('Deploy App on k8s') {
             steps {
-               withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:32771']) {
-                  sh 'kubectl apply -f new_deployment.yaml'
-               }               
+			   script {	
+					withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:32771']) {
+						sh 'kubectl apply -f new_deployment.yaml'
+					}               
+			   }
             }
         }
 	}
