@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apimessage
+  name: apirestmessage
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: apimessage
+      app: apirestmessage
   template:
     metadata:
       labels:
-        app: apimessage
+        app: apirestmessage
     spec:
       containers:
-      - name: apimessage
-        image: luizcssoares/apimessage:latest
+      - name: apirestmessage
+        image: luizcssoares/apirestmessage:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
