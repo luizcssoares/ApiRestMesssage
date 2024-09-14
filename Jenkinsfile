@@ -37,10 +37,14 @@ pipeline {
         stage('Deploy App on k8s') {
             steps {
 			   script {	
+				  try{
 					withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:32771']) {
 						sh 'kubectl apply -f deployment.yaml'
 						sh 'kubectl apply -f service.yaml'
 					}               
+				  } finally {
+                     echo 'Erro no deploy to K8s'  
+				  }	
 			   }
             }
         }
