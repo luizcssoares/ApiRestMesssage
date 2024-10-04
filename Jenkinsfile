@@ -43,7 +43,7 @@ pipeline {
 					//	sh 'kubectl apply -f deployment.yaml'
 					//	sh 'kubectl apply -f service.yaml'
 					//}               
-				  }// finally {
+				  //} finally {
                                      //echo 'Erro no deploy to K8s'  
 				  //}	
 			   }
