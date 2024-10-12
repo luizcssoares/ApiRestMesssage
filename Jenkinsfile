@@ -39,11 +39,11 @@ pipeline {
             steps {
 		   script {			
 			   echo 'Deploy to K8s'				 
-			   //kubernetesDeploy(configs: "**", kubeconfigId: "$KUBECONFIG")								   
-			   withKubeConfig([credentialsId: 'secrets-kind', serverUrl: 'https://127.0.0.1:36951']){
-			     sh 'kubectl apply -f deployment.yaml'
-			     sh 'kubectl apply -f service.yaml'
-			   }       				 			
+			   kubernetesDeploy(configs: "**", kubeconfigId: KUBECONFIG)								   
+			   //withKubeConfig([credentialsId: 'secrets-kind', serverUrl: 'https://127.0.0.1:36951']){
+			   //  sh 'kubectl apply -f deployment.yaml'
+			   //  sh 'kubectl apply -f service.yaml'
+			   //}       				 			
 		   }
             }
         }
