@@ -37,9 +37,8 @@ pipeline {
         stage('Deploy App on k8s') {
             steps {
 			   script {
-				 try {
-				   echo 'Deploy to K8s'
-				 } finnaly {
+				 always {
+				   echo 'Deploy to K8s'				 
 				   //kubernetesDeploy(configs: "deployment.yaml", "service.yaml")				
 				   //withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:36951']) {
 				   withKubeConfig([credentialsId: 'secrets-kind', serverUrl: 'https://127.0.0.1:36951']){
@@ -47,6 +46,12 @@ pipeline {
 					sh 'kubectl apply -f service.yaml'
 				   }       
 				 }
+				 aborted {
+		                    echo 'Aborted Deploy to K8s'				 			 
+				 }
+				 failure {
+				    echo 'Failure Deploy to K8s'				 	 
+				 }  
 			   }
             }
         }
