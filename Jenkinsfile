@@ -1,10 +1,5 @@
 pipeline {
-        agent {
-           kubernetes {
-      	      cloud 'kubernetes'
-	      defaultContainer 'jnlp'
-           }
-        }
+        agent any
 	environment {
 		registry = 'luizcssoares/apirestmessage'
 		dockerhub_credentials = 'dockerhub_luizcssoares'
