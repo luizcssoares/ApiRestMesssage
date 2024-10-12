@@ -1,5 +1,9 @@
 pipeline {
-	agent any
+        agent {
+           kubernetes {
+      	      cloud 'kubernetes'      	      
+           }
+        }
 	environment {
 		registry = 'luizcssoares/apirestmessage'
 		dockerhub_credentials = 'dockerhub_luizcssoares'
