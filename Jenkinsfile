@@ -37,7 +37,7 @@ pipeline {
         stage('Deploy App on k8s') {
             steps {
 			   script {				   
-				  kubernetesDeploy(configs: "**", kubeconfigId: "secrets-kind")
+				  kubernetesDeploy(configs: "**", kubeconfigId: "kubeconfig")
 				  //try{
 					//withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:32771']) {
 					//	sh 'kubectl apply -f deployment.yaml'
