@@ -39,7 +39,7 @@ pipeline {
 			   script {				   
 				  //kubernetesDeploy(configs: "**", kubeconfigId: "kubeconfig")
 				  try{
-					withKubeConfig([credentialsId: 'dockerhub_luizcssoares', serverUrl: 'https://127.0.0.1:36951']) {
+					withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://127.0.0.1:36951']) {
 						sh 'kubectl apply -f deployment.yaml'
 						sh 'kubectl apply -f service.yaml'
 					}               
