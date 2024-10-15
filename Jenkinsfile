@@ -38,7 +38,7 @@ pipeline {
             steps {
 		   script {	
 			   // kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
-			   kubernetesDeploy(configs: "**", kubeconfigId: "kubeconfig")
+			   kubernetesDeploy(configs: "**", kubeconfigId: "Kubeconfig")
 			   // withKubeConfig([credentialsId: 'secret-token-kind', serverUrl: 'https://127.0.0.1:38709']) {
 			   //    sh 'sudo kubectl apply -f deployment.yaml'
 			   //    sh 'sudo kubectl apply -f service.yaml'
