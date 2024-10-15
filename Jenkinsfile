@@ -39,7 +39,10 @@ pipeline {
 		   script {	
 			   // kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
 			   //kubernetesDeploy(configs: "**", kubeconfigId: "Kubeconfig")
-			    withKubeConfig([credentialsId: 'Kubeconfig', serverUrl: 'https://127.0.0.1:38709']) {
+			    withKubeConfig([credentialsId: 'Kubeconfig', 
+					    serverUrl: 'https://127.0.0.1:38709', 
+					    namespace: 'jenkins',
+					    clustername: 'kind-control-plane']) {
 			       sh 'sudo kubectl apply -f deployment.yaml'
 			       sh 'sudo kubectl apply -f service.yaml'
 			    }               				  
