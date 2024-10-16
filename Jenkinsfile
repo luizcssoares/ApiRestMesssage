@@ -39,7 +39,7 @@ pipeline {
 		   script {	
 			   // kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
 			   //kubernetesDeploy(configs: "**", kubeconfigId: "Kubeconfig")
-			    withKubeConfig([credentialsId: 'Kubeconfig', 
+			    withKubeConfig([credentialsId: 'secrets', 
 					    serverUrl: 'https://127.0.0.1:38709', 
 					    namespace: 'jenkins',
 					    clusterName: 'kind-control-plane']) {
