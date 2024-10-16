@@ -36,9 +36,7 @@ pipeline {
 		}
         stage('Deploy App on k8s') {
             steps {
-		   script {	
-			   // kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
-			   //kubernetesDeploy(configs: "**", kubeconfigId: "Kubeconfig")
+		   script {				  
 			    withKubeConfig([credentialsId: 'secrets', 
 					    serverUrl: 'https://127.0.0.1:38709', 
 					    namespace: 'jenkins',
