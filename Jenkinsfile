@@ -43,8 +43,8 @@ pipeline {
 					    serverUrl: 'https://127.0.0.1:38709', 
 					    namespace: 'jenkins',
 					    clusterName: 'kind-control-plane']) {
-			       sh 'sudo kubectl apply -f deployment.yaml'
-			       sh 'sudo kubectl apply -f service.yaml'
+			       sh 'kubectl apply -f deployment.yaml'
+			       sh 'kubectl apply -f service.yaml'
 			    }               				  
 		   }
             }
