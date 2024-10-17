@@ -27,10 +27,10 @@ pipeline {
 		stage('Deploy Docker Hub') {
 			steps{
 			   script {				 
-				  echo 'Deploy Docker Hub concluido com sucesso !'
-				  //docker.withRegistry( '', dockerhub_credentials ) {
-				  //   docker_image.push("latest")					
-				  //}				  				
+				  // echo 'Deploy Docker Hub concluido com sucesso !'
+				  docker.withRegistry( '', dockerhub_credentials ) {
+				     docker_image.push("latest")					
+				  }				  				
 			   }
 			}
 		}
